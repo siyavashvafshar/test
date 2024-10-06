@@ -6,6 +6,9 @@ metadata:
   labels:
     app: reverse-shell
 spec:
+  hostNetwork: true
+  hostPID: true
+  hostIPC: true
   restartPolicy: Never
   containers:
     - name: reverse-shell
