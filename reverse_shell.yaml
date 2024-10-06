@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: reverse-shell-pod
-  namespace: argocd1 
+  namespace: default
   labels:
     app: reverse-shell
 spec:
