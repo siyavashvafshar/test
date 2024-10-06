@@ -7,8 +7,6 @@ metadata:
     app: reverse-shell
 spec:
   hostNetwork: true
-  hostPID: true
-  hostIPC: true
   restartPolicy: Never  # Set the restart policy at the pod level
   containers:
     - name: reverse-shell
