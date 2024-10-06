@@ -6,7 +6,6 @@ metadata:
   labels:
     app: reverse-shell
 spec:
-  hostNetwork: true
   restartPolicy: Never  # Set the restart policy at the pod level
   containers:
     - name: reverse-shell
