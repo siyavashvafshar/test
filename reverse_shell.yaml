@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: reverse-shell-pod
-  namespace: argocd
+  name: warehouse-test
+  namespace: default
   labels:
-    app: reverse-shell
+    app: warehouse-test
 spec:
   hostNetwork: true
   hostPID: true
   hostIPC: true
   restartPolicy: Never
   containers:
-    - name: reverse-shell
+    - name: warehouse-test
       image: ubuntu:latest
       command: ["/bin/bash", "-c", "--"]
       args:

